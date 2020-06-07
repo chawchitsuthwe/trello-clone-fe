@@ -1,0 +1,126 @@
+body{
+	font-family: 'Quicksand', sans-serif;
+	background: url(../img/bgimage.jpg) no-repeat center center fixed; 
+  	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
+}
+
+.container-fluid{
+	padding: 0;
+}
+
+.first-nav{
+	background-color:rgba(0, 0, 0, 0.3);
+}
+
+.second-nav{
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+.btn{
+	background-color: rgb(255,255,255,0.3);
+}
+
+.btn:hover{
+	color: white;
+	background-color: rgb(255,255,255,0.5);
+}
+
+.profile{
+	width: 32px;
+	height: 32px;
+	margin: 5px;
+	border-radius: 50%;
+}
+
+.logo{
+	font-family: 'Pacifico', cursive;
+	font-size: 25px;
+}
+
+.boardname{
+	font-weight: bolder;
+	font-size: 18px;
+	color: white;
+}
+
+.team{
+	font-size: 15px;
+}
+
+#wrapper {
+  	width: 100%;
+  	overflow: auto;
+  	display: flex;
+  	align-items: flex-start;
+  	flex-wrap: nowrap;
+  	&::-webkit-scrollbar {
+    display: none;
+  }
+
+}
+
+.list{
+	border-radius: 3px;
+	background-color: #EBECF0;
+	width: 18rem;
+	padding: 10px;
+	margin-right: 6px;
+	flex: 0 0 auto;
+}
+
+.list .btn{
+	color: #606C85;
+	background-color: rgb(255,255,255,0.0);
+}
+
+.list .btn:hover{
+	background-color: rgb(0,0,0,0.1);
+}
+
+.btn-new-card{
+	width: 100%;
+}
+
+.btn-new-list{
+	flex: 0 0 auto;
+	width: 18rem;
+	color: white;
+}
+
+.card{
+	padding: 8px;
+	margin-bottom: 5px;
+	box-shadow: 0 2px 2px -2px rgb(0,0,0,0.2);
+}
+
+.card:hover{
+	background-color: #F4F5F7;
+}
+
+.card p{
+	padding-top: 5px;
+	font-size: 14px;
+	margin-bottom: -4px;
+}
+
+.card-color{
+	width: 50px;
+	height: 10px;
+	border-radius: 5px;
+	background-color: red;
+}
+
+.card-member{
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	background-color: #C1C7D0;
+	padding: 3px;
+	font-size: 13px;
+	font-weight: bold;
+	margin-left: auto;
+}
