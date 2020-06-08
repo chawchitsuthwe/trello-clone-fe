@@ -11,3 +11,4 @@ function limitWrapperHeight() {
   wrapper.style.maxHeight = (body - nav1 - nav2) + "px";
   wrapper.style.minHeight = (body - nav1 - nav2) + "px";
 }
+
