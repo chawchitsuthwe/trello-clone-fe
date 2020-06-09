@@ -103,15 +103,16 @@ body{
 
 .card p{
 	padding-top: 5px;
+	padding-bottom: 5px;
 	font-size: 14px;
 	margin-bottom: -4px;
 }
 
-.card-color{
+.card-label{
 	width: 50px;
 	height: 10px;
 	border-radius: 5px;
-	background-color: red;
+	float: right;
 }
 
 .card-member{
@@ -122,6 +123,7 @@ body{
 	padding: 3px;
 	font-size: 13px;
 	font-weight: bold;
+	float: left;
 }
 
 /* The container */

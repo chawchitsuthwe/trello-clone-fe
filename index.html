@@ -4,6 +4,7 @@
 
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
 	<title>Trello Clone</title>
 
 	<!--css-->
@@ -52,50 +53,7 @@
     </nav>
 
     <div id="wrapper" class="p-2">
-    	<div class="list">
-    		<div class="d-flex justify-content-between align-items-center mb-1">
-      			<h6 class="pl-2">Doing</h6>
-      			<button class="btn btn-sm" data-toggle="modal" data-target="#list-action-modal"><i class="fa fa-ellipsis-h"></i></button>
-    		</div>
-
-    		<div class="card" data-toggle="modal" data-target="#card-modal">
-    			<div class="card-color"></div>
-      			<p>JavaScript Essential</p>
-      			<div class="card-member ml-auto">CC</div>
-    		</div>
-
-    		<div class="d-flex justify-content-between align-items-center">
-      			<button class="btn btn-sm btn-new-card text-left" id="add-new-card">
-        			<i class="fa fa-plus"></i>&nbsp;&nbsp;Add another card
-      			</button>
-      			<button class="btn btn-sm"><i class="fa fa-window-restore"></i></button>
-    		</div>
-		</div>
-
-		<div class="list">
-    		<div class="d-flex justify-content-between align-items-center mb-1">
-      			<h6 class="pl-2">Doing</h6>
-      			<button class="btn btn-sm"><i class="fa fa-ellipsis-h"></i></button>
-    		</div>
-
-    		<div class="card">
-    			<div class="card-color"></div>
-      			<p>JavaScript Essential</p>
-      			<div class="ml-auto card-member">CC</div>
-    		</div>
-
-    		<div class="d-flex justify-content-between align-items-center">
-      			<button class="btn btn-sm btn-new-card text-left" id="add-new-card">
-        			<i class="fa fa-plus"></i>&nbsp;&nbsp;Add another card
-      			</button>
-      			<button class="btn btn-sm"><i class="fa fa-window-restore"></i></button>
-    		</div>
-		</div>
-
-		<button class="btn btn-sm btn-new-list text-left" data-toggle="modal" data-target="#add-list-modal">
-        	<i class="fa fa-plus"></i>&nbsp;&nbsp;Add another list
-		</button>
-    </div>
+	</div>
 
     <div class="modal fade" id="card-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   		<div class="modal-dialog modal-lg">
@@ -105,15 +63,16 @@
       					<div class="col-md-1">
       						<i class="fa fa-window-maximize"></i>
       					</div>
-      					<div class="col-md-11">
-      						<span class="h5 font-weight-bold">JavaScript Essential</span>
+      					<div class="col-md-11 mb-2">
+      						<span class="h5 font-weight-bold" id="card-title"></span><br>
+      						<span>in list <u id="list-title"></u></span>
       					</div>
       				</div>
       				<div class="row mb-4">
       					<div class="col-md-1"></div>
       					<div class="col-md-11">
       						<h6>MEMBERS</h6>
-      						<div class="card-member">CC</div>
+      						<div id="card-member"></div>
       					</div>
       				</div>
       				
@@ -128,12 +87,7 @@
       				<div class="row mb-4">
       					<div class="col-md-1"></div>
       					<div class="col-md-11">
-      						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-      						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-      						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-      						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      						<p id="card-desc"></p>
       					</div>
       				</div>
 
@@ -147,16 +101,7 @@
       				</div>
       				<div class="row">
       					<div class="col-md-1"></div>
-      					<div class="col-md-11">
-      						<label class="cb-container">One
-  								<input type="checkbox" checked="checked">
-  								<span class="checkmark"></span>
-							</label>
-							<label class="cb-container">Two
-  								<input type="checkbox">
-  								<span class="checkmark"></span>
-							</label>
-      					</div>
+      					<div class="col-md-11" id="card-checklist"></div>
       				</div>
       			</div>
   			</div>
