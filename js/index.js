@@ -7,6 +7,7 @@ const addListBtn = `
   	<div style="width: 0.5rem">&nbsp;</div>
 `;
 
+
 window.onload = () => {
   	console.log("DOM is ready!");
   	limitWrapperHeight();
@@ -69,7 +70,9 @@ function getCard(cards){
 		cardStr = cardStr +
 		`
 		<div class="card" data-toggle="modal" data-target="#card-modal" onclick="cardClicked($(this).attr('list-title'), $(this).attr('card-id'))" list-title="${cards[i].list.title}" card-id="${cards[i].id}">
-    		${getLabel(cards[i].labels)}
+    		<div class="d-flex justify-content-start">
+    			${getLabel(cards[i].labels)}
+    		</div>
       		<p>${cards[i].title}</p>
       		<div class="d-flex justify-content-end">
   				${getMember(cards[i].accounts)}
@@ -94,11 +97,31 @@ function getLabel(labels){
 	return labelStr;
 }
 
+function getLabelWithName(labels){
+	var labelStr = "";
+
+	if(labels.length != 0){
+		document.getElementById("label-head").style.display = "block";
+
+		for(var i=0; i<labels.length; i++){
+			labelStr = labelStr +
+			`
+			<div class="card-label-name" style="background-color: ${labels[i].color};"> ${labels[i].name} </div>
+			`;
+		}
+	}
+	else
+	{
+		document.getElementById("label-head").style.display = "none";
+	}
+	return labelStr;
+}
 
 function getMember(accounts){
 	var memberStr = "";
 
 	if(accounts.length != 0){
+		document.getElementById("member-head").style.display = "block";
 		for(var i=0; i<accounts.length; i++){
 
 			memberStr = memberStr +
@@ -107,6 +130,9 @@ function getMember(accounts){
 			`;
 		}
 	}
+	else{
+		document.getElementById("member-head").style.display = "none";
+	}
 	return memberStr;
 }
 
@@ -114,6 +140,7 @@ function getChecklist(checklists){
 	var checklistStr = "";
 
 	if(checklists.length != 0){
+		document.getElementById("checklist-head").style.display = "";
 		for(var i=0; i<checklists.length; i++){
 
 			checklistStr = checklistStr +
@@ -126,7 +153,7 @@ function getChecklist(checklists){
 		}
 	}
 	else{
-		checklistStr = "No checklist";
+		document.getElementById("checklist-head").style.display = "none";
 	}
 
 	return checklistStr;
@@ -155,6 +182,7 @@ function cardClicked(listTitle, cardId){
     		document.getElementById("card-title").innerHTML = card.title;
   			document.getElementById("list-title").innerHTML = listTitle;
   			document.getElementById("card-member").innerHTML = getMember(card.accounts);
+  			document.getElementById("card-label").innerHTML = getLabelWithName(card.labels)
   			document.getElementById("card-desc").innerHTML = card.description;
   			document.getElementById("card-checklist").innerHTML = getChecklist(card.checklists)
   		})
