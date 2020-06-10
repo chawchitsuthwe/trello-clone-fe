@@ -52,84 +52,78 @@
     	  </div>
     </nav>
 
-    <div id="wrapper" class="p-2">
-	</div>
+    <div id="wrapper" class="p-2"></div>
 
     <div class="modal fade" id="card-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   		<div class="modal-dialog modal-lg">
     		<div class="modal-content">
-      			<div class="modal-body">
-      				<div class="row">
-      					<div class="col-md-1">
-      						<i class="fa fa-window-maximize"></i>
-      					</div>
-      					<div class="col-md-11 mb-2">
-      						<span class="h5 font-weight-bold" id="card-title"></span><br>
-      						<span>in list <u id="list-title"></u></span>
-      					</div>
+      		<div class="modal-body">
+      			<div class="row">
+      				<div class="col-md-1">
+      					<i class="fa fa-window-maximize"></i>
       				</div>
-      				<div class="row mb-4">
-      					<div class="col-md-1"></div>
-      					<div class="col-md-11">
-      						<div class="d-flex justify-content-start">
-      							<div class="align-self-stretch mr-3" id="member-head">
-      								<h6>MEMBERS</h6>
-      								<div id="card-member"></div>
-      							</div>
-      							<div class="align-self-stretch" id="label-head">
-      								<h6>LABELS</h6>
-      								<div id="card-label"></div>
-      							</div>
+      				<div class="col-md-11 mb-2">
+      					<span class="h5 font-weight-bold" id="card-title"></span><br>
+      					<span>in list <u id="list-title"></u></span>
+      				</div>
+      			</div>
+      			<div class="row mb-4">
+      				<div class="col-md-1"></div>
+      				<div class="col-md-11">
+      					<div class="d-flex justify-content-start">
+      						<div class="align-self-stretch mr-3" id="member-head">
+      							<h6>MEMBERS</h6>
+      							<div id="card-member"></div>
       						</div>
-      						
+      						<div class="align-self-stretch" id="label-head">
+      							<h6>LABELS</h6>
+      							<div id="card-label"></div>
+      						</div>
       					</div>
-      				</div>
-      				
-      				<div class="row">
-      					<div class="col-md-1">
-      						<i class="fa fa-align-justify"></i>
-      					</div>
-      					<div class="col-md-11">
-      						<span class="h5">Description</span>
-      					</div>
-      				</div>
-      				<div class="row">
-      					<div class="col-md-1"></div>
-      					<div class="col-md-11">
-      						<p id="card-desc"></p>
-      					</div>
-      				</div>
-
-      				<div class="row mt-3" id="checklist-head">
-      					<div class="col-md-1">
-      						<i class="fa fa-check-square"></i>
-      					</div>
-      					<div class="col-md-11">
-      						<span class="h5">Checklist</span>
-      					</div>
-      				</div>
-      				<div class="row">
-      					<div class="col-md-1"></div>
-      					<div class="col-md-11" id="card-checklist"></div>
+      					
       				</div>
       			</div>
-  			</div>
-		</div>
-	</div>
-
-	<div class="modal fade" id="add-list-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  		<div class="modal-dialog">
-    		<div class="modal-content">
-      			<div class="modal-body">
-      				<form>
-  						<div class="form-group">
-    						<input type="text" class="form-control" placeholder="Enter list title">
-  						</div>
-  						<button type="submit" class="btn btn-green">Add List</button>
-  					</form>
+      			
+      			<div class="row">
+      				<div class="col-md-1">
+      					<i class="fa fa-align-justify"></i>
+      				</div>
+      				<div class="col-md-11">
+      					<span class="h5">Description</span>
+      				</div>
       			</div>
-      		</div>
-      	</div>
+      			<div class="row">
+      				<div class="col-md-1"></div>
+    					<div class="col-md-11">
+     						<p id="card-desc"></p>
+    					</div>
+     				</div>
+     				<div class="row mt-3" id="checklist-head">
+     					<div class="col-md-1">
+    						<i class="fa fa-check-square"></i>
+     					</div>
+     					<div class="col-md-11">
+     						<span class="h5">Checklist</span>
+     					</div>
+     				</div>
+     				<div class="row">
+     					<div class="col-md-1"></div>
+     					<div class="col-md-11" id="card-checklist"></div>
+    				</div>
+    			</div>
+         </div>
+		    </div>
+      </div>
+
+      <div class="modal fade" id="add-list-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body">
+    				  <input type="text" class="form-control mb-2" placeholder="Enter list title" id="new-list-title">
+  					 <button class="btn btn-green" onclick="addNewList()">Add List</button>
+     			  </div>
+     		 </div>
+     	  </div>
       </div>
 
       <div class="modal fade" id="list-action-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
