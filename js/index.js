@@ -1,5 +1,7 @@
 const url = "http://localhost:8181/";
+
 var maxListPos;
+var listId;
 
 const addListBtn = `
   	<button id="add-list-btn" class="btn btn-sm btn-new-list text-left" data-toggle="modal" data-target="#add-list-modal">
@@ -43,25 +45,27 @@ function getList(list){
 
 	for(var i=0; i<list.length; i++){
 
-		listStr = listStr + 
-		`
-		<div class="list">
-    		<div class="d-flex justify-content-between align-items-center mb-1">
-      			<h6 class="pl-2">${list[i].title}</h6>
-      			<button class="btn btn-sm" data-toggle="modal" data-target="#list-action-modal"><i class="fa fa-ellipsis-h"></i></button>
-    		</div>
+		if(list[i].status == 1){
+			listStr = listStr + 
+			`
+			<div class="list">
+    			<div class="d-flex justify-content-between align-items-center mb-1">
+      				<h6 class="pl-2">${list[i].title}</h6>
+      				<button class="btn btn-sm" data-toggle="modal" data-target="#list-action-modal" onclick="getListId($(this).attr('list-id'))" list-id="${list[i].id}"><i class="fa fa-ellipsis-h"></i></button>
+    			</div>
 
-  			${getCard(list[i].cards)}
+  				${getCard(list[i].cards)}
 
-    		<div class="d-flex justify-content-between align-items-center">
-      			<button class="btn btn-sm btn-new-card text-left" id="add-new-card">
-        			<i class="fa fa-plus"></i>&nbsp;&nbsp;Add another card
-      			</button>
-      			<button class="btn btn-sm"><i class="fa fa-window-restore"></i></button>
-    		</div>
-		</div>
+    			<div class="d-flex justify-content-between align-items-center">
+      				<button class="btn btn-sm btn-new-card text-left" id="add-new-card">
+        				<i class="fa fa-plus"></i>&nbsp;&nbsp;Add another card
+      				</button>
+      				<button class="btn btn-sm"><i class="fa fa-window-restore"></i></button>
+    			</div>
+			</div>
 
-		`;
+			`;
+		}
 	}
 
 	return listStr;
@@ -70,18 +74,20 @@ function getList(list){
 function getCard(cards){
 	var cardStr = "";
 	for(var i=0; i<cards.length; i++){
-		cardStr = cardStr +
-		`
-		<div class="card" data-toggle="modal" data-target="#card-modal" onclick="cardClicked($(this).attr('list-title'), $(this).attr('card-id'))" list-title="${cards[i].list.title}" card-id="${cards[i].id}">
-    		<div class="d-flex justify-content-start">
-    			${getLabel(cards[i].labels)}
+		if(cards[i].status == 1){
+			cardStr = cardStr +
+			`
+			<div class="card" data-toggle="modal" data-target="#card-modal" onclick="cardClicked($(this).attr('list-title'), $(this).attr('card-id'))" list-title="${cards[i].list.title}" card-id="${cards[i].id}">
+    			<div class="d-flex justify-content-start">
+    				${getLabel(cards[i].labels)}
+    			</div>
+      			<p>${cards[i].title}</p>
+      			<div class="d-flex justify-content-end">
+      				${getMember(cards[i].accounts)}
+				</div>
     		</div>
-      		<p>${cards[i].title}</p>
-      		<div class="d-flex justify-content-end">
-      			${getMember(cards[i].accounts)}
-			</div>
-    	</div>
-		`;
+			`;
+		}
 	}
 	return cardStr;
 }
@@ -195,6 +201,11 @@ function cardClicked(listTitle, cardId){
 
 }
 
+function getListId(listId){
+	this.listId = listId;
+	//console.log(listId);
+}
+
 function addNewList(){
 	const listTitle = document.getElementById("new-list-title").value;
 
@@ -208,7 +219,7 @@ function addNewList(){
         	position: maxListPos + 1,
         	status: 1
       	})
-    	})
+    })
 	.then(function(res) {
 		res.json();
 	})
@@ -218,6 +229,36 @@ function addNewList(){
      	window.onload();
   
   	})
+  	.catch(function (err) {
+    	console.log(err);
+  	});
+
+}
+
+function deleteList(){
+
+	fetch(url + "/list/"+listId, {
+      	method: "DELETE"
+    })
+  	.then(function(){
+    	$('#list-action-modal').modal('hide');
+  		window.onload();
+  	})
+  	.catch(function (err) {
+    	console.log(err);
+  	});
+
+}
+
+function archiveList(){
+
+	fetch(url + "/list/" + listId + "/2", {
+      	method: "PUT"
+    })
+	.then(function(){
+    	$('#list-action-modal').modal('hide');
+		window.onload();
+	})
   	.catch(function (err) {
     	console.log(err);
   	});
