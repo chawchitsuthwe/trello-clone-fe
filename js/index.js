@@ -2,6 +2,7 @@ const url = "http://localhost:8181/";
 
 var maxListPos;
 var listId;
+var currentListPos;
 
 const addListBtn = `
   	<button id="add-list-btn" class="btn btn-sm btn-new-list text-left" data-toggle="modal" data-target="#add-list-modal">
@@ -193,7 +194,7 @@ function cardClicked(listTitle, cardId){
   		document.getElementById("card-member").innerHTML = getMember(card.accounts);
   		document.getElementById("card-label").innerHTML = getLabelWithName(card.labels)
   		document.getElementById("card-desc").innerHTML = card.description;
-  		document.getElementById("card-checklist").innerHTML = getChecklist(card.checklists)
+  		document.getElementById("card-checklist").innerHTML = getChecklist(card.checklists);
   	})
   	.catch(function (err) {
    		console.log(err);
@@ -264,3 +265,55 @@ function archiveList(){
   	});
 
 }
+
+function showListDataInEdit(){
+	//console.log(listId);
+	fetch(url+"list/"+listId)
+  	.then(function (response) {
+    	return response.json();
+  	})
+  	.then(function (list) {
+  		document.getElementById("editListTitle").value = list.title;
+  		currentListPos = list.position;
+  		// var select = document.getElementById("edit-list-position");
+  		// for(var i=1; i<=maxListPos; i++){
+  			
+  		// 	var option = document.createElement('option');
+  		// 	option.value = i;
+  		// 	option.innerHTML = i;
+  		// 	select.add(option);
+  		// }
+  		window.onload();
+  	})
+  	.catch(function (err) {
+   		console.log(err);
+  	});
+}
+
+document.querySelector('#list-edit-form').addEventListener('submit', (event) => {
+	event.preventDefault();
+	const editListTitle = event.target.editListTitle.value;
+	//console.log(editListTitle + " " + currentListPos);
+	fetch(url + "/list/"+listId, {
+      	method: "PUT",
+     	headers: {
+        	"Content-Type": "application/json"
+      	},
+      	body: JSON.stringify({
+        	title: editListTitle,
+        	position: currentListPos,
+        	status: 1
+      	})
+    })
+	.then(function(res) {
+		res.json();
+	})
+	.then(function (data) {
+		$('#edit-list-modal').modal('hide');
+    	window.onload();
+  	})
+  	.catch(function (err) {
+    	console.log(err);
+  	});
+
+})
