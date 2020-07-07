@@ -203,7 +203,6 @@ function cardClicked(listTitle, cardId){
   	.catch(function (err) {
    		console.log(err);
   	});
-
 }
 
 function getListId(listId){
@@ -295,14 +294,7 @@ function showListDataInEdit(){
   	.then(function (list) {
   		document.getElementById("editListTitle").value = list.title;
   		currentListPos = list.position;
-  		// var select = document.getElementById("edit-list-position");
-  		// for(var i=1; i<=maxListPos; i++){
-  			
-  		// 	var option = document.createElement('option');
-  		// 	option.value = i;
-  		// 	option.innerHTML = i;
-  		// 	select.add(option);
-  		// }
+      toggelListActionPopup(false);
   		window.onload();
   	})
   	.catch(function (err) {
@@ -347,8 +339,8 @@ function toggelAddListPopup(isOpen) {
   }
 }
 
-function inputEntered(event) {
-  if(event.keyCode == 13){
+function inputEntered(event, status) {
+  if(event.keyCode == 13 && status == "add"){
     // detect Enter key, if user hits enter then save new list
     saveNewList();
   }
@@ -368,7 +360,6 @@ function displayListActionPopup(event) {
   toggelListActionPopup(true);
 
 }
-
 
 function toggelListActionPopup(isOpen) {
   if(listActionPopup) {
