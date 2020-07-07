@@ -3,9 +3,11 @@ const url = "http://localhost:8181/";
 var maxListPos;
 var listId;
 var currentListPos;
+var addListPopup;
+var listActionPopup;
 
 const addListBtn = `
-  	<button id="add-list-btn" class="btn btn-sm btn-new-list text-left" data-toggle="modal" data-target="#add-list-modal">
+  	<button id="add-list-btn" class="btn btn-sm btn-new-list text-left" onclick="addNewList(event)">
         <i class="fa fa-plus"></i>&nbsp;&nbsp;Add another list
 	</button>
   	<div style="width: 0.5rem">&nbsp;</div>
@@ -14,6 +16,8 @@ const addListBtn = `
 
 window.onload = () => {
   	//console.log("DOM is ready!");
+    addListPopup = document.getElementById("add-list-popup");
+    listActionPopup = document.getElementById("list-action-popup");
   	limitWrapperHeight();
   	fetchListData();
 };
@@ -52,7 +56,7 @@ function getList(list){
 			<div class="list">
     			<div class="d-flex justify-content-between align-items-center mb-1">
       				<h6 class="pl-2">${list[i].title}</h6>
-      				<button class="btn btn-sm" data-toggle="modal" data-target="#list-action-modal" onclick="getListId($(this).attr('list-id'))" list-id="${list[i].id}"><i class="fa fa-ellipsis-h"></i></button>
+      				<button id="list-action-btn" class="btn btn-sm" onclick="displayListActionPopup(event);getListId($(this).attr('list-id'))" list-id="${list[i].id}"><i class="fa fa-ellipsis-h"></i></button>
     			</div>
 
   				${getCard(list[i].cards)}
@@ -207,33 +211,47 @@ function getListId(listId){
 	//console.log(listId);
 }
 
-function addNewList(){
-	const listTitle = document.getElementById("new-list-title").value;
+function addNewList(event){
+  event.stopPropagation();
+  if(addListPopup){
 
-	fetch(url + "/list", {
-      	method: "POST",
-     	headers: {
-        	"Content-Type": "application/json"
-      	},
-      	body: JSON.stringify({
-        	title: listTitle,
-        	position: maxListPos + 1,
-        	status: 1
-      	})
+    const addNewListBtn = document.getElementById("add-list-btn");
+    const rect = addNewListBtn.getBoundingClientRect();
+    console.log(rect);
+   
+    addListPopup.style.top = rect.top + "px";
+    addListPopup.style.left = rect.left + "px";
+    addListPopup.style.width = rect.width + "px";
+    toggelAddListPopup(true);
+  }
+}
+
+function saveNewList(){
+ const listTitle = document.getElementById("list-title-input");
+
+  fetch(url + "/list", {
+        method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          title: listTitle.value,
+          position: maxListPos + 1,
+          status: 1
+        })
     })
-	.then(function(res) {
-		res.json();
-	})
-	.then(function (data) {
-    	document.getElementById("new-list-title").value = "";
-    	$('#add-list-modal').modal('hide');
-     	window.onload();
+  .then(function(res) {
+    res.json();
+  })
+  .then(function (data) {
+      listTitle.value = "";
+      toggelAddListPopup(false);
+      window.onload();
   
-  	})
-  	.catch(function (err) {
-    	console.log(err);
-  	});
-
+    })
+  .catch(function (err) {
+      console.log(err);
+  });
 }
 
 function deleteList(){
@@ -243,6 +261,7 @@ function deleteList(){
     })
   	.then(function(){
     	$('#list-action-modal').modal('hide');
+      toggelListActionPopup(false);
   		window.onload();
   	})
   	.catch(function (err) {
@@ -257,8 +276,9 @@ function archiveList(){
       	method: "PUT"
     })
 	.then(function(){
-    	$('#list-action-modal').modal('hide');
-		window.onload();
+      $('#list-action-modal').modal('hide');
+      toggelListActionPopup(false);
+		  window.onload();
 	})
   	.catch(function (err) {
     	console.log(err);
@@ -317,3 +337,41 @@ document.querySelector('#list-edit-form').addEventListener('submit', (event) => 
   	});
 
 })
+
+function toggelAddListPopup(isOpen) {
+  if(addListPopup) {
+    addListPopup.style.display = isOpen ? "block":"none";
+    if(isOpen) {
+      document.getElementById("list-title-input").focus();
+    }
+  }
+}
+
+function inputEntered(event) {
+  if(event.keyCode == 13){
+    // detect Enter key, if user hits enter then save new list
+    saveNewList();
+  }
+}
+
+function displayListActionPopup(event) {
+  event.stopPropagation();
+
+  let btn = event.target;
+  if(btn.nodeName == "i" || btn.nodeName == "I") {
+    btn = btn.parentNode;
+  }
+  const loc = btn.getBoundingClientRect();
+  console.log(loc);
+  listActionPopup.style.top = loc.top + loc.height + 5 + "px";
+  listActionPopup.style.left = loc.left + "px";
+  toggelListActionPopup(true);
+
+}
+
+
+function toggelListActionPopup(isOpen) {
+  if(listActionPopup) {
+    listActionPopup.style.display = isOpen ? "block":"none";
+  }
+}
