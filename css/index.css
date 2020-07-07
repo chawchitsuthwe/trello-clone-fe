@@ -222,6 +222,14 @@ body{
   position: absolute;
 }
 
+#list-title-popup{
+	display: none;
+  	z-index: 3;
+  	background-color: transparent;
+  	position: absolute;
+
+}
+
 .btn-success{
 	background-color: #61BD4F;
 }
