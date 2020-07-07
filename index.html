@@ -115,18 +115,15 @@
 		    </div>
       </div>
 
-      <div class="modal fade" id="add-list-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-body">
-    				  <input type="text" class="form-control mb-2" placeholder="Enter list title" id="new-list-title">
-  					 <button class="btn btn-green" onclick="addNewList()">Add List</button>
-     			  </div>
-     		 </div>
-     	  </div>
+      <div class="rounded trello-fadein p-1" id="add-list-popup">
+        <input type="text" class="w-100" id="list-title-input" onkeyup="inputEntered(event)"/>
+        <div class="d-flex justify-content-between align-items-center pt-1">
+          <button class="btn btn-success" onclick="saveNewList()">Add</button>
+          <button class="btn btn-sm my-1 mx-2 p-0 text-danger" onclick="toggelAddListPopup(false)" style="font-size: large;"><i class="fa fa-close"></i></button>
+        </div>
       </div>
 
-      <div class="modal fade" id="list-action-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!--       <div class="modal fade" id="list-action-popup" tabindex="-1">
   		<div class="modal-dialog">
     		<div class="modal-content">
     			<div class="modal-header">
@@ -141,6 +138,19 @@
       			</div>
       		</div>
       	</div>
+      </div> -->
+
+      <div class="card list-action-card" id="list-action-popup">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item text-secondary">
+            <div class="d-flex justify-content-between align-items-center">
+              <p style="font-size: 18px;">List Actions</p>
+              <button class="btn btn-sm p-0 text-danger" onclick="toggelListActionPopup(false)" style="font-size: medium;"><i class="fa fa-close"></i></button>
+            </div>
+          </li>
+          <a onclick="archiveList()" class="list-group-item list-group-item-action">Archive This List</a>
+          <a onclick="deleteList()" class="list-group-item list-group-item-action">Delete This List</a>
+        </ul>
       </div>
 
       <div class="modal fade" id="edit-list-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
