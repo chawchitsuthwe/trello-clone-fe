@@ -210,3 +210,32 @@ body{
 .btn-green:hover{
 	background-color: #61BD4F;
 }
+
+.trello-fadein {
+  animation: fadeIn 150ms ease-out forwards;
+}
+
+#add-list-popup {
+  display: none;
+  z-index: 10;
+  background-color: #EBECF0;
+  position: absolute;
+}
+
+.btn-success{
+	background-color: #61BD4F;
+}
+
+#list-action-popup{
+	position: absolute;
+  	top: 0;
+  	left: 0;
+  	z-index: 3;
+  	display: none;
+  	width: 280px;
+  	box-shadow: rgba(180, 180, 180, 0.7) 2px 2px 3px 1px;
+}
+
+.list-action-card:hover{
+	background-color: white;
+}
